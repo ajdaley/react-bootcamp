@@ -6,35 +6,34 @@
         </title>
         <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
         <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script crossorigin src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     </head>
     <body>
         <div id='app'></div>
 
-        <script>
-            const name = 'Alun'
-            const handle = '@ajdaley'
+        <script type='text/babel'>
+            const my_name = 'Alun'
+            const my_handle = '@ajdaley'
 
             function NameComponent(props) {
-                return React.createElement(
-                    'h1',
-                    null,
-                    props.name
-                )
+                return <h1>{props.name}</h1>
+            }
+
+            function HandleELement(props) {
+                return <h3>{props.handle}</h3>
             }
             
-            const handleElement = React.createElement(
-                'h3',
-                null,
-                handle
-            )
-            const wrapperElement = React.createElement(
-                'div',
-                {id:'container'},
-                NameComponent({name:'Alun'}),
-                handleElement
-            )
-            console.log('wrapperElement',wrapperElement)
-            ReactDOM.render(wrapperElement, document.getElementById('app'))
+            function App() {
+                return (
+                    <div id='container'>
+                        <NameComponent name={my_name}/>
+                        <HandleELement handle={my_handle}/>
+                    </div>
+                )
+            }
+
+            console.log('wrapperElement',<App/>)
+            ReactDOM.render(<App/>, document.getElementById('app'))
         </script>
     </body>
 </html>
