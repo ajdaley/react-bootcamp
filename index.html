@@ -13,11 +13,15 @@
         <script>
             const name = 'Alun'
             const handle = '@ajdaley'
-            const nameElement = React.createElement(
-                'h1',
-                null,
-                name
-            )
+
+            function NameComponent(props) {
+                return React.createElement(
+                    'h1',
+                    null,
+                    props.name
+                )
+            }
+            
             const handleElement = React.createElement(
                 'h3',
                 null,
@@ -26,10 +30,10 @@
             const wrapperElement = React.createElement(
                 'div',
                 {id:'container'},
-                nameElement,
+                NameComponent({name:'Alun'}),
                 handleElement
             )
-            console.log(wrapperElement)
+            console.log('wrapperElement',wrapperElement)
             ReactDOM.render(wrapperElement, document.getElementById('app'))
         </script>
     </body>
