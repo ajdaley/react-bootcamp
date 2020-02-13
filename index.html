@@ -26,13 +26,61 @@
             function Avatar() {
                 return <img src='file:///Users/alun.daley/Downloads/6265.JPG'/>
             }
+
+            function FriendsList (props) {
+                return (
+                    <ul>
+                        {props.list.map((name) => (
+                            <li key={name}>
+                                <span>{name}</span>
+                                <button onClick={() => props.onRemoveFriend(name)}>Remove</button>
+                            </li>
+                        ))}
+                    </ul>
+                )
+            }
             
+            class FriendListManager extends React.Component {
+                constructor(props) {
+                    super(props)
+
+                    this.state = {
+                        friends: ['Alex','John','Claire'] 
+                    }
+
+                    // Because we can apparently export the method statically
+                    //  we want to bind to this class
+                    this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
+                
+                }
+ 
+                handleRemoveFriend(name) { 
+                    this.setState((currentState) => {
+                        return {
+                            friends: currentState.friends.filter((friend) => friend !== name)
+                        }
+                    })
+                }
+
+                render() {
+                     return (
+                        <div id='container'>
+                            <FriendsList 
+                                list={this.state.friends}
+                                onRemoveFriend={this.handleRemoveFriend}
+                            />
+                        </div>
+                    )
+                }
+            }
+
             function App(props) {
                 return (
                     <div id='container'>
                         <Avatar/>
                         <NameComponent name={props.name}/>
                         <HandleELement handle={props.handle}/>
+                        <FriendListManager/>
                     </div>
                 )
             }
