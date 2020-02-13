@@ -12,7 +12,7 @@
         <div id='app'></div>
 
         <script type='text/babel'>
-            const my_name = 'Alun'
+            const my_name = 'Alun Daley'
             const my_handle = '@ajdaley'
 
             function NameComponent(props) {
@@ -22,10 +22,15 @@
             function HandleELement(props) {
                 return <h3>{props.handle}</h3>
             }
+
+            function Avatar() {
+                return <img src='file:///Users/alun.daley/Downloads/6265.JPG'/>
+            }
             
             function App(props) {
                 return (
                     <div id='container'>
+                        <Avatar/>
                         <NameComponent name={props.name}/>
                         <HandleELement handle={props.handle}/>
                     </div>
