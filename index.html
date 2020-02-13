@@ -45,13 +45,21 @@
                     super(props)
 
                     this.state = {
-                        friends: ['Alex','John','Claire'] 
+                        friends: ['Alex','John','Claire'],
+                        input: ''
                     }
 
                     // Because we can apparently export the method statically
                     //  we want to bind to this class
                     this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
-                
+                    this.handleInputUpdate = this.handleInputUpdate.bind(this)
+                    this.handleAddFriend = this.handleAddFriend.bind(this)
+                }
+
+                handleInputUpdate(e) {
+                    this.setState({
+                        input: e.target.value
+                    })
                 }
  
                 handleRemoveFriend(name) { 
@@ -62,9 +70,25 @@
                     })
                 }
 
+                handleAddFriend() { 
+                    this.setState((currentState) => {
+                        return {
+                            friends: currentState.friends.concat(this.state.input),
+                            input:''
+                        }
+                    })
+                }
+
                 render() {
                      return (
-                        <div id='container'>
+                        <div>
+                            <input 
+                                type='text'
+                                placeholder='new friend'
+                                value={this.state.input}
+                                onChange={this.handleInputUpdate}
+                            />
+                            <button onClick={this.handleAddFriend}>Submit</button>
                             <FriendsList 
                                 list={this.state.friends}
                                 onRemoveFriend={this.handleRemoveFriend}
