@@ -54,6 +54,7 @@
                     this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
                     this.handleInputUpdate = this.handleInputUpdate.bind(this)
                     this.handleAddFriend = this.handleAddFriend.bind(this)
+                    this.handleClearAll = this.handleClearAll.bind(this)
                 }
 
                 handleInputUpdate(e) {
@@ -79,6 +80,14 @@
                     })
                 }
 
+                handleClearAll() { 
+                    this.setState((currentState) => {
+                        return {
+                            friends: currentState.friends.splice(0,0),
+                        }
+                    })
+                }
+
                 render() {
                      return (
                         <div>
@@ -89,6 +98,7 @@
                                 onChange={this.handleInputUpdate}
                             />
                             <button onClick={this.handleAddFriend}>Submit</button>
+                            <button onClick={this.handleClearAll}>Clear All</button>
                             <FriendsList 
                                 list={this.state.friends}
                                 onRemoveFriend={this.handleRemoveFriend}
