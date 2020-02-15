@@ -154,6 +154,12 @@
                     console.log("--did update--")
                 }
 
+                componentDidUpdate(prevProps, prevState) {
+                    console.log("--did update with args--")
+                    console.log("prevProps", prevProps)
+                    console.log("prevState", prevState)
+                }
+
                 handleInputUpdate(e) {
                     this.setState({
                         input: e.target.value
