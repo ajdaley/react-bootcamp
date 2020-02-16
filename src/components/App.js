@@ -4,6 +4,11 @@ import NameComponent from './Name'
 import HandleElement from './Handle'
 import FriendListManager from './FriendListManager'
 import Avatar from './Avatar'
+import {
+    BrowserRouter,
+    Route,
+    Link
+} from 'react-router-dom'
 
 window.API = {
   fetchFriends() {
@@ -28,14 +33,38 @@ window.API = {
   }
 }
 
+function All(props) {
+    return (
+        <div>
+            <Avatar/>
+            <NameComponent name={props.name}/>
+            <HandleElement handle={props.handle}/>
+            <FriendListManager/>
+        </div>
+    )
+}
+
+function Topic() {
+    return (<div>Topic</div>)
+}
+
 function App(props) {
   return (
-    <div id='container'>
-      <Avatar/>
-      <NameComponent name={props.name}/>
-      <HandleElement handle={props.handle}/>
-      <FriendListManager/>
-    </div>
+        <BrowserRouter>
+            <div>
+                <ul>
+                    <li><Link to='/'>All</Link></li>
+                    <li><Link to='/avatar'>Avatar</Link></li>
+                    <li><Link to='/topics'>Topics</Link></li>
+                </ul>
+
+                <hr/>
+
+                <Route exact path='/' component={All}/>
+                <Route path='/avatar' component={Avatar}/>
+                <Route path='/topics' component={Topic}/>
+            </div>
+        </BrowserRouter>
     )
 }   
 
