@@ -44,8 +44,31 @@ function All(props) {
     )
 }
 
-function Topic() {
-    return (<div>Topic</div>)
+function Topic({match}) {
+    // {match} === props.match -> some weird notation
+    console.log(match)
+    return (
+        <h2>{match.params.topicId}</h2>
+    )
+}
+
+function Topics(props) {
+    // Use match.url with nested Link
+    // Use match.path with nested Route
+    return (
+        <div>
+            <h2>Topics</h2>
+            <ul>
+                <li><Link to={`${props.match.url}/rendering`}>Rendering with React</Link></li>
+                <li><Link to={`${props.match.url}/components`}>Components</Link></li>
+                <li><Link to={`${props.match.url}/props-v-state`}>Props vs State</Link></li>
+            </ul>
+
+            <hr/>
+            
+            <Route exact path={`${props.match.path}/:topicId`} component={Topic}/>
+        </div>
+    )
 }
 
 function App(props) {
@@ -62,7 +85,7 @@ function App(props) {
 
                 <Route exact path='/' component={All}/>
                 <Route path='/avatar' component={Avatar}/>
-                <Route path='/topics' component={Topic}/>
+                <Route path='/topics' component={Topics}/>
             </div>
         </BrowserRouter>
     )
